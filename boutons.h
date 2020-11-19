@@ -4,7 +4,7 @@
 #include <donnees.h>
 #include <mem_sh.h>
 #include <donnees_borne.h>
-#include <memoires_borne.h>
+#include <memoire_borne.h>
 
 
 // bouton_charge ,bouton_stop, entiers à 1 si le bouton est appuye 
