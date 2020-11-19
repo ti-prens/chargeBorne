@@ -11,14 +11,14 @@ void timer_initialiser()
 {
 io=acces_memoire(&shmid);
 /*associe la zone de memoire partagee au pointeur*/
-if(io=NULL) printf("Erreur pas de mem sh\n");
+if(io==NULL) printf("Erreur pas de mem sh\n");
 depart_timer=io->timer_sec;
 }
 
 
-int timer_valeur()
+int valeur_timer ()
 {
-timer=O;
+int timer=0;
 timer=(io->timer_sec)-depart_timer;
 return timer;
 }

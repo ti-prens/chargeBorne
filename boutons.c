@@ -1,33 +1,34 @@
-#include <donnees_borne.h>
-#include <memoire_borne.h>
-#include <stdio.h>
-
+#include <unistd.h>
 #include "boutons.h"
 
-
 entrees *io;
-int memeory_id;
+int shmid;
 
-
-int boutons_charge()
+void boutons_initialiser()
 {
-	io=acces_memoire(&memeory_id);
-	if(io==NULL) printf("Erreur memoire partage \n");
-	if(io->bouton_charge==1)
-	{
-		io->bouton_charge=0;
-		return 1;	
-	}
-	else return 0;
+	io=acces_memoire(&shmid);
+	/* associe la zone de memoire partagee au pointeur */
+	if (io==NULL) printf("Erreur pas de mem sh\n");	
 }
-int boutons_stop()
-{
-	io=acces_memoire(&memeory_id);//(&shmid);
-	if(io==NULL) printf("Erreur memoire partage \n");
-	if(io->bouton_charge==1)
+
+
+int charge()
+{int bouton;
+ if(io->bouton_charge==1)
+   bouton=1;
+ else
+   bouton=0;
+
+return bouton;
+}
+
+int stop()
+{int bouton;
+if(io->bouton_stop==1)
 	{
-		io->bouton_stop=0;
-		return 1;	
+  	bouton=1;
 	}
-	else return 0;
+else
+  {bouton=0;}
+  return bouton; 
 }
