@@ -19,6 +19,8 @@ void lecteurcarte_initialiser()
 	//ajouter un commentaire pour dire que la carte est ien initialisé
 	/*associe la zone de memoire partagee au pointeur*/
 	if(io==NULL) printf("Erreur pas de mem sh\n");
+	//apres initialisation syteme passe à etat dispo
+	voyants_set_dispo(VERT);
 }
 
 void lecteurcarte_lire_carte()
@@ -30,6 +32,8 @@ void lecteurcarte_lire_carte()
 	numero=lecture_numero_carte();
 	
 	printf("Badge inséré,numero lu %d \n", lecture_numero_carte());
+	//une fois carte en traitement systeme n'est plus disponible
+	voyants_set_dispo(OFF);
 	
 	//succes de la verification client 
 	if (baseclient_authentifier(numero)==1)
