@@ -41,51 +41,62 @@ void lecteurcarte_lire_carte()
 			num_client=numero;
 			printf("authentification OK \n ");
 		 	voyants_blink_charge(VERT);
-		 	while((valeur_timer())< 60 && (boutons_charge_status()==0 && boutons_stop_status()==0))
+		 	
+		 	timer_reset();
+		 	printf("timer get value = %d",timer_get_value());
+		 	
+//		 	while((timer_get_value())< 60 && (boutons_charge_status()==0 && boutons_stop_status()==0))
+			while(timer_get_value()< 60)
 			{
-		 	}
-		 
-		 	if(boutons_stop_status()==1)
-		 	{
-		 		io->bouton_stop=0;
-		 	}
-		 
-			 if(valeur_timer()>60)
-		 	{
-		 		printf("Temps ecoule!!! \n");
-		 		lecteurcarte_initialiser();
-		 	}
-		 
-		 	if(boutons_charge_status() == 1)
-		 	{
-		 		io->bouton_charge=0;
-		 		printf("charge appui");
-		 		voyants_set_dispo(OFF);
-		 		boutons_charge_status();
-		 		//fin charge
-		 		attente_insertion_carte();
-		 		numero=lecture_numero_carte();
-		 		printf("numero lu %d \n",numero);
-		 		
-		 		while(numero != num_client)
+				if(boutons_charge_status() == 1)
 		 		{
-		 			voyants_blink_defaut(ROUGE);
-		 			
+		 			io->bouton_charge=0;
+		 			printf("charge appui");
+		 			voyants_set_dispo(OFF);
+		 			boutons_charge_status();
+		 			//fin charge
 		 			attente_insertion_carte();
 		 			numero=lecture_numero_carte();
 		 			printf("numero lu %d \n",numero);
-		 		}
-		 		attente_retrait_carte();
-		 		//deconnecter();
-		 		/*while(tension()!=12)
-		 		{
-		 		}*/
+		 		
+		 			while(numero != num_client)
+		 			{
+		 				voyants_blink_defaut(ROUGE);
+		 			
+		 				attente_insertion_carte();
+		 				numero=lecture_numero_carte();
+		 				printf("numero lu %d \n",numero);
+		 			}
+		 			attente_retrait_carte();
+		 			//deconnecter();
+		 			/*while(tension()!=12)
+		 			{
+		 			}*/
 		 	
-		 		//verouiller_trappe();
-		 		//io->led_prise=OFF;
-		 		//io->led_dispo=VERT;
+		 			//verouiller_trappe();
+		 			//io->led_prise=OFF;
+		 			//io->led_dispo=VERT;
+		 		}
+		 		
+		 		if(boutons_stop_status()==1)
+		 		{
+		 			io->bouton_stop=0;
+		 			printf("stop appui");
+		 			break;
+		 			
+		 			
+		 		}
 		 	}
+		 
+			if(timer_get_value()>60) 
+			{
+				printf("Temps ecoule!!! \n");
+			}
+		 	lecteurcarte_initialiser();		 	
 		 }
+	
+	
+	
 	//échec de la verification client
 	else
 	{	voyants_blink_defaut(ROUGE);

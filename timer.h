@@ -4,7 +4,7 @@
 #include <memoire_borne.h>
 
 void timer_initialiser();
-int valeur_timer();
-void timer_raz();
+void timer_reset();
+int  timer_get_value();
 
 #endif
