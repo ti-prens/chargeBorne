@@ -5,6 +5,8 @@
 #include <memoire_borne.h>
 
 void boutons_initialiser();
-int stop();
-int charge();
+
+int boutons_stop_status();
+int boutons_charge_status();
+
 #endif

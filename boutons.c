@@ -12,23 +12,24 @@ void boutons_initialiser()
 }
 
 
-int charge()
-{int bouton;
- if(io->bouton_charge==1)
-   bouton=1;
- else
-   bouton=0;
+int boutons_charge_status()
+{	
+	int bouton;
+ 	if(io->bouton_charge==1)
+   		bouton=1;
+ 	else
+   		bouton=0;
 
-return bouton;
+	return bouton;
 }
 
-int stop()
-{int bouton;
-if(io->bouton_stop==1)
-	{
-  	bouton=1;
-	}
-else
-  {bouton=0;}
-  return bouton; 
+int boutons_stop_status()
+{	
+	int bouton;
+	if(io->bouton_stop==1)
+		bouton=1;
+	else
+  		bouton=0;
+  		
+  	return bouton; 
 }

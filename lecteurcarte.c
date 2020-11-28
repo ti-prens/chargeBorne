@@ -37,11 +37,11 @@ void lecteurcarte_lire_carte()
 			num_client=numero;
 			printf("authentification OK \n ");
 		 	voyants_blink_charge(VERT);
-		 	while((valeur_timer())< 60 && (charge()==0 && stop()==0))
+		 	while((valeur_timer())< 60 && (boutons_charge_status()==0 && boutons_stop_status()==0))
 			{
 		 	}
 		 
-		 	if(stop()==1)
+		 	if(boutons_stop_status()==1)
 		 	{
 		 		io->bouton_stop=0;
 		 	}
@@ -52,12 +52,12 @@ void lecteurcarte_lire_carte()
 		 		lecteurcarte_initialiser();
 		 	}
 		 
-		 	if(charge() == 1)
+		 	if(boutons_charge_status() == 1)
 		 	{
 		 		io->bouton_charge=0;
 		 		printf("charge appui");
-		 		io->led_dispo=OFF;
-		 		charge();
+		 		voyants_set_dispo(OFF);
+		 		boutons_charge_status();
 		 		//fin charge
 		 		attente_insertion_carte();
 		 		numero=lecture_numero_carte();
@@ -65,10 +65,8 @@ void lecteurcarte_lire_carte()
 		 		
 		 		while(numero != num_client)
 		 		{
-		 			usleep(1000000);
-		 			io->led_defaut=ROUGE;
-		 			usleep(1000000);
-		 			io->led_defaut=OFF;
+		 			voyants_blink_defaut(ROUGE);
+		 			
 		 			attente_insertion_carte();
 		 			numero=lecture_numero_carte();
 		 			printf("numero lu %d \n",numero);
@@ -86,7 +84,7 @@ void lecteurcarte_lire_carte()
 		 }
 	//échec de la verification client
 	else
-	{	voyants_blink_default(ROUGE);
+	{	voyants_blink_defaut(ROUGE);
 		printf("authentification echouée \n");
 		lecteurcarte_initialiser();
 	}
