@@ -1,6 +1,7 @@
-lecteurcarte.o: lecteurcarte.c lecteurcarte.h baseclient.h voyants.h \
- timer.h boutons.h baseclient.h
+lecteurcarte.o: lecteurcarte.c baseclient.h lecteurcarte.h baseclient.h \
+ voyants.h timer.h boutons.h
 borne.o: borne.c lecteurcarte.h baseclient.h voyants.h timer.h boutons.h
 baseclient.o: baseclient.c baseclient.h
 voyants.o: voyants.c voyants.h
 boutons.o: boutons.c boutons.h
+timer.o: timer.c timer.h

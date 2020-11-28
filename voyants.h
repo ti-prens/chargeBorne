@@ -4,15 +4,9 @@
 #include <memoire_borne.h>
 
 
-
-
-
-
 void voyants_initialiser();
-void set_charge();
-void set_dispo();
-int dispo();
-void blink_charge();
-
+void voyants_blink_charge();
+void voyants_set_dispo(int x);
+void voyants_set_charge(int x);
 
 #endif

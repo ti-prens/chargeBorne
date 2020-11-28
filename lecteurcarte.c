@@ -1,9 +1,10 @@
 #include <unistd.h>
 #include <stdio.h>
-#include "lecteurcarte.h"
-
 #include <baseclient.h>
 
+#include "lecteurcarte.h"
+#include "voyants.h"
+#include "timer.h"
 
 
 entrees *io;
