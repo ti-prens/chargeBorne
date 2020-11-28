@@ -3,8 +3,7 @@
 #include <baseclient.h>
 
 #include "lecteurcarte.h"
-#include "voyants.h"
-#include "timer.h"
+
 
 
 entrees *io;
@@ -32,12 +31,12 @@ void lecteurcarte_lire_carte()
 	
 	printf("Badge inséré,numero lu %d \n", lecture_numero_carte());
 	
-	
+	//succes de la verification client 
 	if (baseclient_authentifier(numero)==1)
 		{
 			num_client=numero;
 			printf("authentification OK \n ");
-		 	voyants_blink_charge();
+		 	voyants_blink_charge(VERT);
 		 	while((valeur_timer())< 60 && (charge()==0 && stop()==0))
 			{
 		 	}
@@ -85,8 +84,9 @@ void lecteurcarte_lire_carte()
 		 		//io->led_dispo=VERT;
 		 	}
 		 }
+	//échec de la verification client
 	else
-	{
+	{	voyants_blink_default(ROUGE);
 		printf("authentification echouée \n");
 		lecteurcarte_initialiser();
 	}

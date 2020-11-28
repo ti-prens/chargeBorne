@@ -5,8 +5,11 @@
 
 
 void voyants_initialiser();
-void voyants_blink_charge();
-void voyants_set_dispo(int x);
-void voyants_set_charge(int x);
+
+void voyants_set_dispo(led x);
+void voyants_set_charge(led  x);
+
+void voyants_blink_charge(led x);
+void voyants_blink_default(led x);
 
 #endif

@@ -16,40 +16,53 @@ void voyants_initialiser()
 }
 
 
-void voyants_set_charge(int x)
+void voyants_set_charge(led  x)
 {
 	switch(x)
 	{
-		case 0 : io->led_charge=OFF; break;
-		case 1 : io->led_charge=ROUGE;break;
-		case 2 : io->led_charge=VERT;break;
+		case OFF : io->led_charge=OFF; break;
+		case ROUGE : io->led_charge=ROUGE;break;
+		case VERT: io->led_charge=VERT;break;
 		default : io->led_charge=OFF;
 		printf("Erreur voyants_set_charge");
 	}
 }
 
 
-void voyants_set_dispo(int x)
+void voyants_set_dispo(led  x)
 {
 	switch(x)
 	{
-		case 0 : io->led_dispo=OFF; break;
-		case 1 : io->led_dispo=ROUGE;break;
-		case 2 : io->led_dispo=VERT;break;
+		case OFF : io->led_dispo=OFF; break;
+		case ROUGE : io->led_dispo=ROUGE;break;
+		case VERT : io->led_dispo=VERT;break;
 		default : io->led_dispo=OFF;
 		printf("Erreur voyants_set_charge");
 	}
 }
 
 
-void voyants_blink_charge()
+void voyants_blink_charge(led x)
 {
 	int i;
 	for(i=0;i<8;i++)
 	{
 		usleep(500000);//suspend le processus en cours
-	 	voyants_set_charge(2);
+	 	voyants_set_charge(x);
 	 	usleep(500000);
-	 	voyants_set_charge(0);
+	 	voyants_set_charge(OFF);
 	}
 }
+
+void voyants_blink_default(led x)
+{
+	int i;
+	for(i=0;i<8;i++)
+	{
+		usleep(500000);//suspend le processus en cours
+	 	voyants_set_default(x);
+	 	usleep(500000);
+	 	voyants_set_default(OFF);
+	}
+}
+
