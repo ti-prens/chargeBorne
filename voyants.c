@@ -73,7 +73,7 @@ void voyants_set_trappe(led  x)
 	switch(x)
 	{
 		case OFF : io->led_trappe=OFF; break;
-		case ROUGE : io->led_trappe=ROUGE;break;
+		case ROUGE : printf("Erreur voyants_set_trappe == ROUGE. \n did you mean OFF ? ");break;
 		case VERT: io->led_trappe=VERT;break;
 		default : io->led_trappe=OFF;
 		printf("Erreur voyants_set_trappe");

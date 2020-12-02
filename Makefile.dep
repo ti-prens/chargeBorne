@@ -1,7 +1,9 @@
-borne.o: borne.c lecteurcarte.h baseclient.h voyants.h timer.h boutons.h
+borne.o: borne.c lecteurcarte.h voyants.h boutons.h prise.h generateur.h
 lecteurcarte.o: lecteurcarte.c baseclient.h lecteurcarte.h baseclient.h \
- voyants.h timer.h boutons.h
+ voyants.h timer.h boutons.h prise.h generateur.h
 baseclient.o: baseclient.c baseclient.h
 voyants.o: voyants.c voyants.h
 boutons.o: boutons.c boutons.h
 timer.o: timer.c timer.h
+prise.o: prise.c prise.h voyants.h
+generateur.o: generateur.c generateur.h

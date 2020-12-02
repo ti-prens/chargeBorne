@@ -5,8 +5,9 @@
 #include "lecteurcarte.h"
 #include "voyants.h"
 #include "boutons.h"
+#include "prise.h"
+#include "generateur.h"
 
-// manque biblio de generateur
 
 int main()
 {
@@ -14,8 +15,8 @@ int main()
     lecteurcarte_initialiser();
     voyants_initialiser();
     boutons_initialiser();
-   	// prise_initialiser();
-    //reste prise et generateur 
+   	prise_initialiser();
+    generateur_initialiser();
 
     while (1)
     {

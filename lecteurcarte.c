@@ -1,15 +1,22 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <baseclient.h>
+#include <lcarte.h>
 
 #include "lecteurcarte.h"
+
+#include "baseclient.h"
+#include "voyants.h"
+#include "timer.h"
+#include "boutons.h"
+#include "prise.h"
+#include "generateur.h"
 
 
 
 entrees *io;
 int shmid;
 int num_client=0;
-
 
 
 
@@ -27,13 +34,16 @@ void lecteurcarte_lire_carte()
 {
 	unsigned short int numero;
 	
+	
+	
 	attente_insertion_carte();
 	timer_initialiser();
 	numero=lecture_numero_carte();
 	
+	
 	printf("Badge inséré,numero lu %d \n", lecture_numero_carte());
-	//une fois carte en traitement systeme n'est plus disponible
-	voyants_set_dispo(OFF);
+	attente_retrait_carte();	//une fois carte en traitement systeme n'est plus disponible
+	
 	
 	//succes de la verification client 
 	if (baseclient_authentifier(numero)==1)
@@ -43,48 +53,41 @@ void lecteurcarte_lire_carte()
 		 	voyants_blink_charge(VERT);
 		 	
 		 	timer_reset();
-		 	printf("timer get value = %d",timer_get_value());
+/*debug :*/	printf("timer get value = %d \n",timer_get_value());
 		 	
-//		 	while((timer_get_value())< 60 && (boutons_charge_status()==0 && boutons_stop_status()==0))
 			while(timer_get_value()< 60)
 			{
 				if(boutons_charge_status() == 1)
 		 		{
-		 			io->bouton_charge=0;
-		 			printf("charge appui");
-		 			voyants_set_dispo(OFF);
-		 			boutons_charge_status();
-		 			//fin charge
-		 			attente_insertion_carte();
-		 			numero=lecture_numero_carte();
-		 			printf("numero lu %d \n",numero);
-		 		
-		 			while(numero != num_client)
-		 			{
-		 				voyants_blink_defaut(ROUGE);
 		 			
-		 				attente_insertion_carte();
-		 				numero=lecture_numero_carte();
-		 				printf("numero lu %d \n",numero);
-		 			}
-		 			attente_retrait_carte();
-		 			//deconnecter();
-		 			/*while(tension()!=12)
+		 			printf("charge appui\n");
+		 			voyants_set_dispo(OFF);
+		 			
+		 			//power 12V_DC
+		 			generateur_mode(DC);
+		 			generateur_contacteur(FERME);
+		 			prise_deverrouiller();
+		 			
+		 			
+		 			voyants_set_charge(ROUGE);
+		 			//attendre prise vehicule 
+		 			while(io->gene_u == 12)
 		 			{
-		 			}*/
-		 	
-		 			//verouiller_trappe();
-		 			//io->led_prise=OFF;
-		 			//io->led_dispo=VERT;
+		 				//do nothing
+		 				// prise branche => chute tension a cause de PDT
+		 			}
+		 			
+		 			
+		 			//on arrive à la deuxirme couche ^^ enfin 
+		 			generateur_charger_batterie();
+		 			
 		 		}
 		 		
-		 		if(boutons_stop_status()==1)
+		 		
+		 		if(boutons_stop_status() == 1)
 		 		{
-		 			io->bouton_stop=0;
-		 			printf("stop appui");
-		 			break;
-		 			
-		 			
+		 			printf("stop appui\n");
+		 			break;			
 		 		}
 		 	}
 		 
@@ -92,7 +95,7 @@ void lecteurcarte_lire_carte()
 			{
 				printf("Temps ecoule!!! \n");
 			}
-		 	lecteurcarte_initialiser();		 	
+		 			 	
 		 }
 	
 	
