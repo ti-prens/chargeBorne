@@ -22,6 +22,7 @@ int num_client=0;
 
 
 
+
 void lecteurcarte_initialiser()
 {
 	io=acces_memoire(&shmid);
@@ -58,6 +59,7 @@ void lecteurcarte_lire_carte()
 	 
 	if (baseclient_authentifier(numero)==1)
 		{
+			
 			num_client=numero;
 			printf("authentification OK \n ");
 		 	voyants_blink_charge(VERT);
@@ -74,6 +76,8 @@ void lecteurcarte_lire_carte()
 		 			log_msg("charge appui");
 		 			log_msg("dispo set = OFF");
 		 			voyants_set_dispo(OFF);
+		 			log_msg("ajout de l'utilisateur au chargeur");
+		 			baseclient_client_toggle_connected(num_client);
 		 			
 		 			timer_pause(2);
 		 			
@@ -123,7 +127,29 @@ void lecteurcarte_lire_carte()
 		 			 	
 		 }
 	
-	
+	else if (baseclient_authentifier(numero)==2)
+	{
+		log_msg("le proprietaire de la voiture est de retour");
+		log_msg("blink charge en vert");
+		voyants_blink_charge(VERT);
+		log_msg("prise deverouiller");
+		prise_deverrouiller();
+		timer_pause(2);
+		log_msg("attendre retrait de la prise par l'usager");
+		timer_pause(1);
+		log_msg("passage à 12V DC");
+		generateur_mode(DC);
+		timer_pause(1);
+		log_msg("verrouiller trappe");
+		prise_verrouiller();
+		log_msg("eteindre les voyants CHARGE et PRISE");
+		voyants_set_charge(OFF);
+		voyants_set_prise(OFF);
+		log_msg("allumer voyants disponible");
+		voyants_set_dispo(VERT);
+		log_msg("arrete de generer tension");
+		generateur_mode(OFF);
+	}
 	
 	//échec de la verification client
 	else
@@ -135,7 +161,7 @@ void lecteurcarte_lire_carte()
 		
 		timer_pause(2);
 	}
-	
+	timer_pause(10);
  }
 		
 	
