@@ -1,4 +1,3 @@
-#
 # Makefile.c++
 #
 # Instructions:
@@ -15,14 +14,14 @@ TARGET = borne
 CC = gcc
 CFLAGS = -Wall -O -g 
 
-#Version materielle
+# Version materielle
 INCLDIRS = -I .
 LIBDIRS = 
 
-#dependance librairie libsmartcard_borne (voir git)
+# dependance librairie libsmartcard_borne (voir git)
 LIBS64 = -lsmartcard_borne_x64
 
-#on fait un peu de menage
+# on fait un peu de menage
 SRC_DIR := sources
 OBJ_DIR := objets
 BIN_DIR := bins 
@@ -48,4 +47,3 @@ veryclean: clean
 	rm -f $(TARGET) a.out *.*~
 
 include Makefile.dep
-
