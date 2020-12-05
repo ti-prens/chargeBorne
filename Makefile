@@ -22,7 +22,7 @@ LIBDIRS =
 #dependance librairie libsmartcard_borne (voir git)
 LIBS64 = -lsmartcard_borne_x64
 
-SRCS = borne.c lecteurcarte.c  baseclient.c voyants.c boutons.c timer.c prise.c generateur.c
+SRCS = borne.c lecteurcarte.c  baseclient.c voyants.c boutons.c timer.c prise.c generateur.c log.c
 
 OBJS = ${SRCS:.c=.o} 
 

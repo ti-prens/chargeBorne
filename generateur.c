@@ -6,6 +6,11 @@
 
 
 #include "generateur.h"
+#include "prise.h"
+#include "voyants.h"
+#include "timer.h"
+
+#include "log.h"
 
 
 entrees *io;
@@ -46,7 +51,28 @@ void generateur_contacteur(C_AC x) //OUVERT, FERME
 
 void generateur_charger_batterie()
 {
-	printf("debut 2ieme partie");
+	printf("\ndebut 2ieme couche\nCharger batterie\n\n");
+	
+	timer_pause(2);
+	
+	prise_verrouiller();
+	voyants_set_prise(VERT);
+	timer_pause(2);
+	//generer une tension +9V/-12V
+	generateur_mode(AC_1K);
+	//vehicule ferme contacteur S2
+	//tension passe à 6V
+	timer_pause(2);
+	generateur_contacteur(FERME); //AC
+	//generer une tension +6V/-12V
+	//vehicule ouvre S2 (quand batterie charge)
+	//vehicule fait remonter tension à +9V/-12V
+	timer_pause(2);
+	generateur_contacteur(OUVERT); //AC
+	//generer une tension +9V
+	timer_pause(2);
+	voyants_set_charge(VERT);		
+
 }
 
 

@@ -28,3 +28,14 @@ void timer_reset()
 {	
 	TIMER=io->timer_sec;
 }
+
+void timer_pause(int x)
+{
+	int pause = io->timer_sec;
+	
+	while(io->timer_sec < pause+x)
+	{
+		usleep(500); //do nothing for at least 500us
+	}
+}
+
