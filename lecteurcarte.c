@@ -29,15 +29,15 @@ void lecteurcarte_initialiser()
 	/*associe la zone de memoire partagee au pointeur*/
 	if(io==NULL) printf("Erreur pas de mem sh\n");
 	//apres initialisation syteme passe à etat dispo
-	voyants_set_dispo(VERT);
-	prise_verrouiller();
+	
 }
 
 void lecteurcarte_lire_carte()
 {
 
-	lecteurcarte_initialiser();
-	
+	voyants_set_dispo(VERT);
+	prise_verrouiller();
+	log_msg("Au demarrage \n passer dispo en VERTt \n VERROUILLER la Prise");
 	
 	unsigned short int numero;
 	
@@ -66,9 +66,9 @@ void lecteurcarte_lire_carte()
 		 	log_msg("Timer reset : compte des 60 secondes commence");
 /*debug :*/	printf("timer get value = %d \n",timer_get_value());
 		 	
-			while(timer_get_value()<= 60)
-			{
-				if(boutons_charge_status() == 1)
+			do 
+			{			
+				if(boutons_charge_status() == 1 && timer_get_value()<= 60)
 		 		{
 		 			
 		 			log_msg("charge appui");
@@ -106,16 +106,15 @@ void lecteurcarte_lire_carte()
 		 			generateur_charger_batterie();
 		 			
 		 		}
-		 		
-		 		
-		 		if(boutons_stop_status() == 1)
-		 		{
-		 			log_msg("stop appui");
-		 			timer_pause(2);
-		 			break;			
-		 		}
+		 				 			 				 		
+		 	}while(boutons_stop_status() == 0 && io->led_dispo != OFF && timer_get_value()<= 60);
+
+		 	if(boutons_stop_status() == 1)
+		 	{
+		 		timer_pause(2);			
+		 		log_msg("stop appui");
 		 	}
-		 
+		 		
 			if(timer_get_value()>60) 
 			{
 				log_msg("Temps ecoule!!! \n");

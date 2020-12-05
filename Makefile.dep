@@ -7,5 +7,5 @@ voyants.o: voyants.c voyants.h
 boutons.o: boutons.c boutons.h
 timer.o: timer.c timer.h
 prise.o: prise.c prise.h voyants.h
-generateur.o: generateur.c generateur.h prise.h voyants.h timer.h
+generateur.o: generateur.c generateur.h prise.h voyants.h timer.h log.h
 log.o: log.c log.h
