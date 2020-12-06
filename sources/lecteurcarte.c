@@ -1,10 +1,18 @@
+//librairie externe
 #include <unistd.h>
 #include <stdio.h>
 #include <baseclient.h>
 #include <lcarte.h>
 
+//bibliotheque des chefs d'orchestre
 #include "lecteurcarte.h"
+#include "charger_batterie.h"
+#include "reprendre_vehicule.h"
 
+//bibliotheque d'integration / de monitoring
+#include "log.h"
+
+//control bas niveau materielle
 #include "baseclient.h"
 #include "voyants.h"
 #include "timer.h"
@@ -12,7 +20,6 @@
 #include "prise.h"
 #include "generateur.h"
 
-#include "log.h"
 
 
 
@@ -36,16 +43,16 @@ void lecteurcarte_initialiser()
 void lecteurcarte_lire_carte()
 {
 
-	voyants_set_dispo(VERT);
-	prise_verrouiller();
-	log_msg("Au demarrage \n passer dispo en VERTt \n VERROUILLER la Prise");
+	//voyants_set_dispo(VERT);
+	//prise_verrouiller();
+	//log_msg("Au demarrage \n passer dispo en VERT \n VERROUILLER la Prise");
 	
 	unsigned short int numero;
 	
 	
 	
 	attente_insertion_carte();
-	timer_initialiser();
+	//timer_initialiser();
 	numero=lecture_numero_carte();
 	
 	
@@ -56,8 +63,9 @@ void lecteurcarte_lire_carte()
 	//timer_pause(2);
 	
 	log_msg("succes de la verification client");
-	 
-	if (baseclient_authentifier(numero)==1)
+	
+	
+		if (baseclient_authentifier(numero)==1 && generateur_dispo()) //on accepte une nouvelle voiture si il n'ay pas deja une voiture occupan le chargeur
 		{
 			
 			num_client=numero;
@@ -107,17 +115,20 @@ void lecteurcarte_lire_carte()
 		 			timer_pause(2);
 		 			log_msg("sortie de la boucle d'inactivité blocké à 12V");
 		 			//on arrive à la deuxirme couche ^^ enfin 
-		 			generateur_charger_batterie();
+		 			/**************************************/
+		 			charger_batterie();
 		 			
+		 		}
+		 		if(boutons_stop_status() == 1)
+		 		{
+		 			timer_pause(2);			
+		 			log_msg("stop appui");
+		 			break;
 		 		}
 		 				 			 				 		
 		 	}while(boutons_stop_status() == 0 && io->led_dispo != OFF && timer_get_value()<= 60);
 
-		 	if(boutons_stop_status() == 1)
-		 	{
-		 		timer_pause(2);			
-		 		log_msg("stop appui");
-		 	}
+		 	
 		 		
 			if(timer_get_value()>60) 
 			{
@@ -129,26 +140,7 @@ void lecteurcarte_lire_carte()
 	
 	else if (baseclient_authentifier(numero)==2)
 	{
-		log_msg("le proprietaire de la voiture est de retour");
-		log_msg("blink charge en vert");
-		voyants_blink_charge(VERT);
-		log_msg("prise deverouiller");
-		prise_deverrouiller();
-		timer_pause(2);
-		log_msg("attendre retrait de la prise par l'usager");
-		timer_pause(1);
-		log_msg("passage à 12V DC");
-		generateur_mode(DC);
-		timer_pause(1);
-		log_msg("verrouiller trappe");
-		prise_verrouiller();
-		log_msg("eteindre les voyants CHARGE et PRISE");
-		voyants_set_charge(OFF);
-		voyants_set_prise(OFF);
-		log_msg("allumer voyants disponible");
-		voyants_set_dispo(VERT);
-		log_msg("arrete de generer tension");
-		generateur_mode(OFF);
+		reprendre_vehicule(num_client); 
 	}
 	
 	//échec de la verification client

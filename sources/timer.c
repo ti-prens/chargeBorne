@@ -35,7 +35,8 @@ void timer_pause(int x)
 	
 	while(io->timer_sec < pause+x)
 	{
-		usleep(500); //do nothing for at least 500us
+		usleep(5000); //do nothing for at least 5ms
+		//j'imagiine que usleep ne monopolise pas l'os et que d'autre threads peuvent etre traiter 
 	}
 }
 

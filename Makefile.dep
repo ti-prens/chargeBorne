@@ -1,14 +1,22 @@
-lecteurcarte.o: sources/lecteurcarte.c sources/baseclient.h \
- sources/lecteurcarte.h sources/baseclient.h sources/voyants.h \
- sources/timer.h sources/boutons.h sources/prise.h sources/generateur.h \
- sources/log.h
-borne.o: sources/borne.c sources/lecteurcarte.h sources/voyants.h \
- sources/boutons.h sources/prise.h sources/generateur.h sources/log.h
+prise.o: sources/prise.c sources/prise.h sources/voyants.h
+voyants.o: sources/voyants.c sources/voyants.h
 baseclient.o: sources/baseclient.c sources/baseclient.h
-boutons.o: sources/boutons.c sources/boutons.h
 generateur.o: sources/generateur.c sources/generateur.h sources/prise.h \
  sources/voyants.h sources/timer.h sources/log.h
-log.o: sources/log.c sources/log.h
-prise.o: sources/prise.c sources/prise.h sources/voyants.h
+charger_batterie.o: sources/charger_batterie.c sources/charger_batterie.h \
+ sources/generateur.h sources/prise.h sources/voyants.h sources/timer.h \
+ sources/log.h
+boutons.o: sources/boutons.c sources/boutons.h
+borne.o: sources/borne.c sources/lecteurcarte.h sources/voyants.h \
+ sources/boutons.h sources/prise.h sources/generateur.h sources/log.h \
+ sources/baseclient.h
+lecteurcarte.o: sources/lecteurcarte.c sources/baseclient.h \
+ sources/lecteurcarte.h sources/charger_batterie.h \
+ sources/reprendre_vehicule.h sources/log.h sources/baseclient.h \
+ sources/voyants.h sources/timer.h sources/boutons.h sources/prise.h \
+ sources/generateur.h
+reprendre_vehicule.o: sources/reprendre_vehicule.c \
+ sources/reprendre_vehicule.h sources/generateur.h sources/prise.h \
+ sources/voyants.h sources/timer.h sources/baseclient.h sources/log.h
 timer.o: sources/timer.c sources/timer.h
-voyants.o: sources/voyants.c sources/voyants.h
+log.o: sources/log.c sources/log.h

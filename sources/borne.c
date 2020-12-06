@@ -8,7 +8,7 @@
 #include "prise.h"
 #include "generateur.h"
 #include "log.h"
-// #include "baseclient.h"
+#include "baseclient.h"
 
 
 int main()
@@ -22,15 +22,15 @@ int main()
     voyants_initialiser();
    	boutons_initialiser();
    	prise_initialiser();
-   	generateur_initialiser();
-   	
-   	log_msg("fin de plein d'initialisation  repetitive dont je doute de l'utilité \n debut lecteurcarte_lire_carte()");
+   	generateur_initialiser();   	
+   	log_msg("fin de plein d'initialisation  repetitive dont je doute de l'utilité ");
    	
    	log_msg("generer une liste de client authentifiable");
    	baseclient_init();
     
     while (1)
     {  	
+    	log_msg("\n debut lecteurcarte_lire_carte()");
 		lecteurcarte_lire_carte();
     }
 

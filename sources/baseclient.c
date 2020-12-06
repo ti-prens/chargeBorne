@@ -12,7 +12,7 @@ static int SIZE_OF_BASE = 9 ;
 
 struct clients
 {
-	int id, connected, security_byte ;
+	unsigned short int id, connected, security_byte ;
 };//connected = 0 si la voiture n'est pas branché et 1 sinon
 // Je ne suis pas encore sure de ce que je veux faire de security_byte ^^ 
 
