@@ -39,14 +39,11 @@ MAIN	=	sources/borne.c
 
 
 
-$(TARGET):$(move)
+$(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) $(INCLDIRS) -o $@ $(OBJS) $(LIBS64)
 
 $(OBJS):
 	$(CC) $(CFLAGS) $(INCLDIRS) -c ${SRCS}
-
-$(move):$(OBJS)
-	mv *.o ./objets	
 
 depend:
 	$(CC) -MM $(SRCS) $(INCLDIRS) > Makefile.dep

@@ -1,17 +1,14 @@
-<<<<<<< Updated upstream
-borne.o: borne.c lecteurcarte.h voyants.h boutons.h prise.h generateur.h \
- log.h
-lecteurcarte.o: lecteurcarte.c baseclient.h lecteurcarte.h baseclient.h \
- voyants.h timer.h boutons.h prise.h generateur.h log.h
-=======
-lecteurcarte.o: lecteurcarte.c lecteurcarte.h baseclient.h voyants.h \
- timer.h boutons.h baseclient.h
-borne.o: borne.c lecteurcarte.h baseclient.h voyants.h timer.h boutons.h
->>>>>>> Stashed changes
-baseclient.o: baseclient.c baseclient.h
-voyants.o: voyants.c voyants.h
-boutons.o: boutons.c boutons.h
-timer.o: timer.c timer.h
-prise.o: prise.c prise.h voyants.h
-generateur.o: generateur.c generateur.h prise.h voyants.h timer.h log.h
-log.o: log.c log.h
+lecteurcarte.o: sources/lecteurcarte.c sources/baseclient.h \
+ sources/lecteurcarte.h sources/baseclient.h sources/voyants.h \
+ sources/timer.h sources/boutons.h sources/prise.h sources/generateur.h \
+ sources/log.h
+borne.o: sources/borne.c sources/lecteurcarte.h sources/voyants.h \
+ sources/boutons.h sources/prise.h sources/generateur.h sources/log.h
+baseclient.o: sources/baseclient.c sources/baseclient.h
+boutons.o: sources/boutons.c sources/boutons.h
+generateur.o: sources/generateur.c sources/generateur.h sources/prise.h \
+ sources/voyants.h sources/timer.h sources/log.h
+log.o: sources/log.c sources/log.h
+prise.o: sources/prise.c sources/prise.h sources/voyants.h
+timer.o: sources/timer.c sources/timer.h
+voyants.o: sources/voyants.c sources/voyants.h

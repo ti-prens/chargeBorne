@@ -1,7 +1,7 @@
 #ifndef BASECLIENT_H
 #define BASECLIENT_H
 
-#define clients_details_file "../bins/donneesbaseclient.bin"
+#define clients_details_file "./bins/donneesbaseclient.bin"
 
 int baseclient_authentifier(int numcarte);
 void baseclient_init();
