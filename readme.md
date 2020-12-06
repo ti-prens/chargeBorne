@@ -1,4 +1,3 @@
-by Prince Jacquet
 # Borne de recharge : Projet UML
 
 
