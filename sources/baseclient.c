@@ -1,14 +1,11 @@
-#include <baseclient.h>
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "baseclient.h"
 
 
 
 static int SIZE_OF_BASE = 9 ;
-
-//static unsigned int carte [8]={1,2,3,4,5,6,7,9};
-//static char clients_details_file = "donneesbaseclient.bin";
 
 struct clients
 {
@@ -45,14 +42,15 @@ void baseclient_init() //write some clients to bin file for test purposes
 
 
 int baseclient_authentifier(int numcarte)
-{
-	int client_status = 0; 
+{ // retourne le statut du client 
 	/* 
 		0 => non reconnue
 		1 => premier passage
 		2 => vient recuperer sa voiture
 	*/
+	int client_status = 0; 
 	
+	int n; //variable inutile si ce n'est que ça enleve un warning inutile
 	
 	
 	struct clients atrouver;
@@ -74,7 +72,8 @@ int baseclient_authentifier(int numcarte)
 	
 	for(int j =0 ; j <= SIZE_OF_BASE ;j++)
 	{
-		fread(&LeBuffer,sizeof(struct clients),1,fpointeur);
+		
+		n = fread(&LeBuffer,sizeof(struct clients),1,fpointeur);
 		
 		if ( 	LeBuffer.id == atrouver.id &&
 				LeBuffer.security_byte == atrouver.security_byte )
@@ -84,7 +83,7 @@ int baseclient_authentifier(int numcarte)
 				if (LeBuffer.connected == 0) {client_status=1;}
 				else {client_status= 0;}
 		} 
-	}
+	}if (n == SIZE_OF_BASE){printf("Interessant");}
 	
 	fclose(fpointeur);
 	
@@ -93,6 +92,8 @@ int baseclient_authentifier(int numcarte)
 
 void baseclient_client_toggle_connected(int num_client)
 {
+	int n; //variable inutile si ce n'est que ça enleve un warning inutile
+	
 	struct clients atrouver;
 	struct clients LeBuffer;
 	
@@ -112,7 +113,8 @@ void baseclient_client_toggle_connected(int num_client)
 	
 	for(int j =0 ; j <= SIZE_OF_BASE ;j++)
 	{
-		fread(&LeBuffer,sizeof(struct clients),1,fpointeur); //ça retourne le ombre de structure lue 
+		
+		n = fread(&LeBuffer,sizeof(struct clients),1,fpointeur); //ça retourne le ombre de structure lue 
 		// ignorer le warning
 		if ( 	LeBuffer.id == atrouver.id &&
 				LeBuffer.security_byte == atrouver.security_byte )
@@ -122,9 +124,10 @@ void baseclient_client_toggle_connected(int num_client)
 			else atrouver.connected =1;
 			
 			fwrite(&atrouver,sizeof(struct clients),1,fpointeur);
-		} 
+		}
+		 
 	}
-	
+	if (n == SIZE_OF_BASE){printf("Interessant");}
 	fclose(fpointeur);
 }
 /*

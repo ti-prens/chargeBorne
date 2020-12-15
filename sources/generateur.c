@@ -6,9 +6,6 @@
 
 
 #include "generateur.h"
-#include "prise.h"
-#include "voyants.h"
-#include "timer.h"
 
 #include "log.h"
 

@@ -6,12 +6,7 @@
 
 #include "charger_batterie.h"
 
-
-#include "generateur.h"
-#include "prise.h"
-#include "voyants.h"
-#include "timer.h"
-
+#include "borne.h"
 #include "log.h"
 
 
@@ -19,8 +14,13 @@ entrees *io;
 int shmid;
 
 
-void charger_batterie()
+int CHARGE = 0;
+
+int charger_batterie()
 {
+	do
+	{
+	
 	log_msg("debut 2ieme couche\nCharger batterie\n\n");
 	
 	timer_pause(2);
@@ -57,6 +57,7 @@ void charger_batterie()
 	do
 	{
 		log_msg("test fin recharge");
+		checkstop();
 		timer_pause(4);
 	}while(io->gene_u !=9);
 	
@@ -68,6 +69,13 @@ void charger_batterie()
 	generateur_mode(DC);
 	timer_pause(2);
 	log_msg("voyant Charge passe au VERT");
-	voyants_set_charge(VERT);		
+	voyants_set_charge(VERT);	
+	
+	CHARGE = 1;
+	
+	}while(CHARGE == 0);
+	
+	return(CHARGE);
+		
 
 }

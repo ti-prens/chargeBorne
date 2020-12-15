@@ -3,7 +3,7 @@
 
 //3ieme partie du programme 
 //3ieme chef d'orchestre point de vue conception UML
-void reprendre_vehicule(int num_client); 
+int reprendre_vehicule(void); 
 
 
 #endif 

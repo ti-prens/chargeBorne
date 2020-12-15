@@ -53,6 +53,8 @@ all :
 depend:
 	@echo "creer les dependance entre les fichiers automatiquement"
 	$(CC) -MM $(SRCS) $(INCLDIRS) > Makefile.dep
+	@echo "Deplacer les fichiers objets dans le bon repertoire "
+	mv -f -i *.o ./objets
 	
 clean:
 	rm -f -i $(OBJS)

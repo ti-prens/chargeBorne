@@ -1,0 +1,59 @@
+log # 0   reussite de l'init 
+log # 1   generer une liste de client authentifiable 
+Etudiant: clef memoire partagee: 61012884 
+Etudiant: clef memoire partagee: 61012884 
+Etudiant: clef memoire partagee: 61012884 
+Etudiant: clef memoire partagee: 61012884 
+Etudiant: clef memoire partagee: 61012884 
+log # 2   initialisation de la borne 
+log # 3   initialisation des variables globales 
+log # 4   debut lecteurcarte_lire_carte()
+ 
+Veuillez donner le numéro de la carte
+Badge inséré,numero lu 7 
+Carte retiree
+log # 0   reussite de l'init 
+log # 1   generer une liste de client authentifiable 
+Etudiant: clef memoire partagee: 61012884 
+Etudiant: clef memoire partagee: 61012884 
+Etudiant: clef memoire partagee: 61012884 
+Etudiant: clef memoire partagee: 61012884 
+Etudiant: clef memoire partagee: 61012884 
+log # 2   initialisation de la borne 
+log # 3   initialisation des variables globales 
+log # 4   debut lecteurcarte_lire_carte()
+ 
+Veuillez donner le numéro de la carte
+Badge inséré,numero lu 7 
+Carte retiree
+log # 5   succes de la verification client 
+authentification OK 
+ log # 6   blink charge en vert 
+log # 7   Timer reset : compte des 60 secondes commence 
+timer get value = 0 
+log # 8   charge appui 
+log # 9   dispo set = OFF 
+log # 10   prise deverrouiller 
+log # 11   generateur_mode(DC); 
+log # 12   set_charge = ROUGE 
+log # 13   attendre prise vehicule avant boucle d'inactivité blocké à 12V 
+i am stuck in while loop help ! installer_vehicule.c 
+log # 14   sortie de la boucle d'inactivité blocké à 12V 
+log # 15   bonne execution de installer_vehicule 
+log # 16   enregistrer presence vehicule sur la borne 
+log # 17   debut 2ieme couche
+Charger batterie
+
+ 
+log # 18   prise verrouiller 
+log # 19   voyant set prise = VERT 
+log # 20   pour generer du 9V/-12V : generateur_mode(AC_1K);  
+log # 21   test de contacteur S2 ferme par le vehicule 
+log # 22   le vehicule a doit passer la tension à 6V 
+log # 23   contacteur AC ferme 
+log # 24   generer une tension +6V/-12V -> passage en mode AC_CL 
+log # 25   devrait observer le chargement de la batterie 
+log # 26   vehicule ouvre s2 qd batterie charger 
+log # 27   test fin recharge 
+log # 28   test fin recharge 
+log # 29   test fin recharge 

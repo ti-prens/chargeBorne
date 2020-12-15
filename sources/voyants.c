@@ -13,6 +13,10 @@ void voyants_initialiser()
 	io=acces_memoire(&shmid);
 	/*associe la zone de memoire partagee au pointeur*/
 	if(io==NULL) printf("Erreur pas de mem sh\n");
+	voyants_set_charge(OFF);
+	voyants_set_defaut(OFF);
+	voyants_set_prise(OFF);
+	voyants_set_dispo(VERT);
 }
 
 

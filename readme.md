@@ -19,6 +19,7 @@
 #test -> affiche à l'ecran les fichiers sources et objets utilisés dans le makefile 
 #run  -> clean, depend, et lance l'executable ./borne
 ```
+3- les numeros de clients authentifiable sont les 9 chiffres. (1,2, ... , 9)
 
 ## Progression 
 

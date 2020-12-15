@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include <log.h>
+#include "log.h"
 
 
 int log_number;
