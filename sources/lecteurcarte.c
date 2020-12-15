@@ -80,6 +80,7 @@ void lecteurcarte_lire_carte()
 	
 	
 	unsigned short int numero;
+	operateur user;
 		
 	attente_insertion_carte();	
 	numero=lecture_numero_carte();
@@ -92,7 +93,12 @@ void lecteurcarte_lire_carte()
 	
 	checkstop(); // refresh STOP_B value
 	checkdispo(); //refresh DISPO value
-	if (baseclient_authentifier(numero)== 0)
+	
+	user = baseclient_authentifier(numero);
+	
+	
+	
+	if (user == client_inconnu)
 	{	//échec de la verification client
 		log_msg("échec de connexion");
 		printf("Ereur 404 : (super fancy)\n -votre carte n'est pas reconnue");
@@ -100,10 +106,19 @@ void lecteurcarte_lire_carte()
 		voyants_blink_defaut(ROUGE);
 	}
 	
-	checkstop(); // refresh STOP_B value
-	checkdispo(); //refresh DISPO value
+	
+	
+	if(user == client_deconnecte && STOP_B == 0 && DISPO == 0) 
+	{	//chargeur non disponible 
+	
+		log_msg("bon numero mais chargeur pas disponible");
+		printf("Ereur 404 : (super fancy)\n");
+		log_msg("blink defaut en ROUGE pour 8 secondes");
+		voyants_blink_defaut(ROUGE);
+	}
+	
 		
-	if (baseclient_authentifier(numero)== 2 && STOP_B == 0 && DISPO == 0)
+	if (user == client_connecte && STOP_B == 0 && DISPO == 0)
 	{
 		REPRIS = reprendre_vehicule(); 
 		
@@ -117,30 +132,38 @@ void lecteurcarte_lire_carte()
 		}
 	}
 	
-	checkstop(); // refresh STOP_B value
-	checkdispo(); //refresh DISPO value
+	
+	
+	
+
 			
-	if(baseclient_authentifier(numero)== 1 && STOP_B == 0 && DISPO == 1 && generateur_dispo())
+	if(user == client_deconnecte && STOP_B == 0 && DISPO == 1)
 	{	//si c'est le premier passage d'un client et que la borne est disponible :
+	
 		DISPO = 0; //des qu'un utilisateur commence ses config la borne n'est plus disponible
-		// on appelle installer vehicule
+		
+		/*_________________________on appelle installer vehicule_________________________*/
 		log_msg("succes de la verification client");
 		num_client=numero;
 		printf("authentification OK \n ");
 		
+		
+		
 		INSTALLE = installer_vehicule(num_client);
-		if (INSTALLE == 1)
-		{ 
-			log_msg("bonne execution de installer_vehicule");
-			baseclient_client_toggle_connected(num_client);
-			log_msg("enregistrer presence vehicule sur la borne");
-		}
-		else if (INSTALLE == 2)
-		{
-			log_msg("bonne execution de installer_vehicule");
-			log_msg("MAIS depassement du temps limite");	
-			INSTALLE = 0;
-		}
+		
+		
+			if (INSTALLE == 1)
+			{ 
+				log_msg("bonne execution de installer_vehicule");
+				baseclient_client_toggle_connected(num_client);
+				log_msg("enregistrer presence vehicule sur la borne");
+			}
+			else if (INSTALLE == 2)
+			{
+				log_msg("bonne execution de installer_vehicule");
+				log_msg("MAIS depassement du temps limite");	
+				INSTALLE = 0;
+			}
 	
 	
 		checkstop(); // refresh STOP_B value
@@ -148,21 +171,17 @@ void lecteurcarte_lire_carte()
 		if (INSTALLE == 1 && STOP_B == 0)
 		{	//une fois que le vehicule a ete installer
 			
-			//on arrive à la deuxirme couche ^^ enfin 
+			/*_________________________on arrive à la deuxirme couche ^^ enfin_________________________*/
+			 
 			CHARGE = charger_batterie();
-			if (CHARGE == 1){ log_msg("bonne execution de charger_batterie");}	
+			if (CHARGE == 1){ log_msg("bonne execution de charger_batterie");}
+			else if (CHARGE == 2) 
+			{ 
+				log_msg("arret par stop de charger_batterie");
+				baseclient_client_toggle_connected(num_client);
+				log_msg("enregistrer retrait vehicule sur la borne");
+			}	
 		}
-	}
-	checkstop(); // refresh STOP_B value
-	checkdispo(); //refresh DISPO value
-	
-	if(baseclient_authentifier(numero)== 1 && STOP_B == 0 && DISPO == 0) 
-	{	//chargeur non disponible 
-	
-		log_msg("bon numero mais chargeur pas disponible");
-		printf("Ereur 404 : (super fancy)\n");
-		log_msg("blink defaut en ROUGE pour 8 secondes");
-		voyants_blink_defaut(ROUGE);
 	}
 	
 	
@@ -175,7 +194,11 @@ void lecteurcarte_lire_carte()
 	if(STOP_B == 1)
 	{
 		checkstop();
-		STOP_B = 0;
+		log_msg("ARRET Finale d'un appuie STOP");
+		timer_pause(5);
+		initialisation_BORNE();
+		initialisation_var_globales();
+		
 	}
 	
 	log_msg("utlisation des procedures(fonctions) fournies pour liberer les ports");

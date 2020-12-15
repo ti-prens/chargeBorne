@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdio.h>
 #include <donnees_borne.h>
 #include <memoire_borne.h>
 
@@ -31,12 +32,18 @@ void timer_reset()
 
 void timer_pause(int x)
 {
-	int pause = io->timer_sec;
+	int pause = io->timer_sec; //instant t
+	int compteur = 0;
 	
 	while(io->timer_sec < pause+x)
 	{
 		usleep(5000); //do nothing for at least 5ms
-		//j'imagiine que usleep ne monopolise pas l'os et que d'autre threads peuvent etre traiter 
+		//usleep ne monopolise pas l'os et que d'autre threads peuvent etre traiter 
+		if(io->timer_sec == pause + compteur)
+		{
+			printf("\n");
+			compteur++;
+		}
 	}
 }
 

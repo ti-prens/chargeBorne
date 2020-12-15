@@ -12,8 +12,8 @@ void checkstop() //je verifie si il ya stop : si oui je rond la boucle actuelle 
 	STOP_B = STOP_B || boutons_stop_status();
 	if(STOP_B)
 	{
-		printf("bouton stop a ete appuyer \n \n");
-		log_msg("on quitte tout le programme (oui ça casse tout... mais je fais le menage en partant)");
+		printf("\nappuie bouton stop a ete detecte \n \n");
+		//log_msg("on quitte tout le programme (oui ça casse tout... mais je fais le menage en partant)");
 		
 		//goto start; 	//I tried some magic xD
 		//exit(1);    	//I tried atexit function l'exit on retourne au debut du programme

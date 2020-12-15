@@ -1,3 +1,4 @@
+etudiant@m1istr:~/Desktop/ConceptionSysteme/chargeBorne$ ./borne
 log # 0   reussite de l'init 
 log # 1   generer une liste de client authentifiable 
 Etudiant: clef memoire partagee: 61012884 
@@ -13,6 +14,9 @@ Veuillez donner le numéro de la carte
 7
 Badge inséré,numero lu 7 
 Carte retiree
+
+
+
 log # 5   succes de la verification client 
 authentification OK 
  log # 6   blink charge en vert 
@@ -20,12 +24,31 @@ log # 7   Timer reset : compte des 60 secondes commence
 timer get value = 0 
 log # 8   charge appui 
 log # 9   dispo set = OFF 
+
+
+
 log # 10   prise deverrouiller 
 log # 11   generateur_mode(DC); 
+
+
+
 log # 12   set_charge = ROUGE 
 log # 13   attendre prise vehicule avant boucle d'inactivité blocké à 12V 
 i am stuck in while loop help ! installer_vehicule.c 
+
+
+
+
+
 i am stuck in while loop help ! installer_vehicule.c 
+
+
+
+
+
+
+
+
 log # 14   sortie de la boucle d'inactivité blocké à 12V 
 log # 15   bonne execution de installer_vehicule 
 log # 16   enregistrer presence vehicule sur la borne 
@@ -33,57 +56,125 @@ log # 17   debut 2ieme couche
 Charger batterie
 
  
+
+
+
 log # 18   prise verrouiller 
 log # 19   voyant set prise = VERT 
+
+
+
 log # 20   pour generer du 9V/-12V : generateur_mode(AC_1K);  
 log # 21   test de contacteur S2 ferme par le vehicule 
 log # 22   le vehicule a doit passer la tension à 6V 
+
+
+
 log # 23   contacteur AC ferme 
 log # 24   generer une tension +6V/-12V -> passage en mode AC_CL 
 log # 25   devrait observer le chargement de la batterie 
 log # 26   vehicule ouvre s2 qd batterie charger 
 log # 27   test fin recharge 
 log # 28   test fin recharge 
+
+
+
+
+
 log # 29   test fin recharge 
+
+
+
+
+
 log # 30   test fin recharge 
+
+
+
+
+
 log # 31   test fin recharge 
+
+
+
+
+
 log # 32   test fin recharge 
+
+
+
+
+
 log # 33   test fin recharge 
+
+
+
+
+
+
+
+
 log # 34   contacteur AC OUVERT 
 log # 35   generer une tension +9V : mode DC 
+
+
+
 log # 36   voyant Charge passe au VERT 
 log # 37   bonne execution de charger_batterie 
+
+
+
+
+
+
 log # 38   utlisation des procedures(fonctions) fournies pour liberer les ports 
 log # 39   debut lecteurcarte_lire_carte()
- 
-Veuillez donner le numéro de la carte
-5
-Badge inséré,numero lu 5 
-Carte retiree
-log # 40   bon numero mais chargeur pas disponible 
-Ereur 404 : (super fancy)
-log # 41   blink defaut en ROUGE pour 8 secondes 
-log # 42   utlisation des procedures(fonctions) fournies pour liberer les ports 
-log # 43   debut lecteurcarte_lire_carte()
  
 Veuillez donner le numéro de la carte
 7
 Badge inséré,numero lu 7 
 Carte retiree
-log # 44   le proprietaire de la voiture est de retour 
-log # 45   blink charge en vert 
-log # 46   prise deverouiller 
-log # 47   attendre retrait de la prise par l'usager 
+
+
+
+log # 40   le proprietaire de la voiture est de retour 
+log # 41   blink charge en vert 
+log # 42   prise deverouiller 
+
+
+
+log # 43   attendre retrait de la prise par l'usager 
 i am stuck in while loop help ! reprendre_vehicule.c 
-i am stuck in while loop help ! reprendre_vehicule.c
-i am stuck in while loop help ! reprendre_vehicule.c  
-log # 48   sortie de la boucle d'inactivité blocké à 9V 
-log # 49   passage à 12V DC 
-log # 50   verrouiller trappe 
-log # 51   eteindre les voyants CHARGE et PRISE 
-log # 52   allumer voyants disponible 
-log # 53   arrete de generer tension 
-log # 54   utlisation des procedures(fonctions) fournies pour liberer les ports 
-log # 55   debut lecteurcarte_lire_carte()
+
+
+
+
+
+i am stuck in while loop help ! reprendre_vehicule.c 
+
+
+
+
+
+
+
+
+log # 44   sortie de la boucle d'inactivité blocké à 9V 
+log # 45   passage à 12V DC 
+
+
+log # 46   verrouiller trappe 
+log # 47   eteindre les voyants CHARGE et PRISE 
+log # 48   allumer voyants disponible 
+log # 49   arrete de generer tension 
+
+
+
+
+
+
+log # 50   utlisation des procedures(fonctions) fournies pour liberer les ports 
+log # 51   debut lecteurcarte_lire_carte()
  
 Veuillez donner le numéro de la carte
+^C

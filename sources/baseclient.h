@@ -8,7 +8,9 @@
 //static unsigned int carte [8]={1,2,3,4,5,6,7,9};
 //static char clients_details_file = "donneesbaseclient.bin";
 
-int baseclient_authentifier(int numcarte);
+typedef enum {client_connecte,client_deconnecte,client_inconnu,gerant} operateur;
+
+operateur baseclient_authentifier(int numcarte);
 void baseclient_init();
 void baseclient_client_toggle_connected(int num_client);
 

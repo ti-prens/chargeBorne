@@ -41,14 +41,15 @@ void baseclient_init() //write some clients to bin file for test purposes
 
 
 
-int baseclient_authentifier(int numcarte)
+operateur baseclient_authentifier(int numcarte)
 { // retourne le statut du client 
 	/* 
 		0 => non reconnue
 		1 => premier passage
 		2 => vient recuperer sa voiture
 	*/
-	int client_status = 0; 
+	operateur utilisateur	= client_inconnu;
+	int client_status 		= 0; 
 	
 	int n; //variable inutile si ce n'est que ça enleve un warning inutile
 	
@@ -87,7 +88,14 @@ int baseclient_authentifier(int numcarte)
 	
 	fclose(fpointeur);
 	
-	return client_status;
+	switch(client_status)
+	{
+		case 0 : utilisateur = client_inconnu ; 	break ;	// unknown User
+		case 1 : utilisateur = client_deconnecte ; 	break ;	//premier passage
+		case 2 : utilisateur = client_connecte ; 	break ; //second passage
+	}
+	
+	return utilisateur;
 }
 
 void baseclient_client_toggle_connected(int num_client)

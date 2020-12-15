@@ -17,7 +17,7 @@ int shmid;
 int CHARGE = 0;
 
 int charger_batterie()
-{
+{	extern int STOP_B;
 	do
 	{
 	
@@ -58,8 +58,31 @@ int charger_batterie()
 	{
 		log_msg("test fin recharge");
 		checkstop();
+		if(STOP_B == 1)
+		{
+			printf("appuie bouton stop detecté\n");
+			generateur_mode(DC);
+			log_msg("arret du chargement du véhicule : generateur passe à DC et arret voyants charge");
+			voyants_set_charge(OFF);
+			generateur_contacteur(OUVERT);
+			prise_deverrouiller();
+			while(io->gene_u == 9)
+			{
+				printf("Debrancher votre vehicule\n");
+			}
+			voyants_set_prise(OFF);
+			log_msg("vehicule debranché");
+			
+			CHARGE = 2;
+			
+			break;
+		}
 		timer_pause(4);
 	}while(io->gene_u !=9);
+	
+	checkstop();
+	if(STOP_B == 1){break;}
+	
 	
 	timer_pause(2);
 	log_msg("contacteur AC OUVERT");
