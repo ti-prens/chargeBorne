@@ -14,10 +14,10 @@ entrees *io;
 int shmid;
 
 
-int CHARGE = 0;
 
 int charger_batterie()
 {	extern int STOP_B;
+	extern int CHARGE;
 	do
 	{
 	

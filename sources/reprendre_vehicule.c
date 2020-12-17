@@ -65,5 +65,5 @@ int reprendre_vehicule()
 	}while(REPRIS ==0);
 	
 	checkstop();
-	return (!REPRIS);
+	return (REPRIS);
 }

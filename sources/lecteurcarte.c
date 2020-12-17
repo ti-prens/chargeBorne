@@ -93,8 +93,8 @@ void lecteurcarte_lire_carte()
 	
 	checkstop(); // refresh STOP_B value
 	checkdispo(); //refresh DISPO value
-	
-	user = baseclient_authentifier(numero);
+	num_client = numero;
+	user = baseclient_authentifier(num_client);
 	
 	
 	

@@ -1,13 +1,13 @@
-etudiant@m1istr:~/Desktop/ConceptionSysteme/chargeBorne$ ./borne
-log # 0   reussite de l'init 
-log # 1   generer une liste de client authentifiable 
-Etudiant: clef memoire partagee: 61012884 
-Etudiant: clef memoire partagee: 61012884 
-Etudiant: clef memoire partagee: 61012884 
-Etudiant: clef memoire partagee: 61012884 
-Etudiant: clef memoire partagee: 61012884 
-log # 2   initialisation de la borne 
-log # 3   initialisation des variables globales 
+etudiant@m1istr:~/Desktop/ConceptionSysteme/chargeBorne$ ./borne                                                      
+log # 0   reussite de l'init                                
+log # 1   generer une liste de client authentifiable        
+Etudiant: clef memoire partagee: 61012884                   
+Etudiant: clef memoire partagee: 61012884                   
+Etudiant: clef memoire partagee: 61012884                   
+Etudiant: clef memoire partagee: 61012884                   
+Etudiant: clef memoire partagee: 61012884                   
+log # 2   initialisation de la borne                        
+log # 3   initialisation des variables globales             
 log # 4   debut lecteurcarte_lire_carte()
  
 Veuillez donner le numéro de la carte
@@ -167,14 +167,15 @@ log # 46   verrouiller trappe
 log # 47   eteindre les voyants CHARGE et PRISE 
 log # 48   allumer voyants disponible 
 log # 49   arrete de generer tension 
+log # 50   bonne execution de reprendre_vehicule 
+log # 51   client deconnecté -> prise debrancher 
 
 
 
 
 
 
-log # 50   utlisation des procedures(fonctions) fournies pour liberer les ports 
-log # 51   debut lecteurcarte_lire_carte()
+log # 52   utlisation des procedures(fonctions) fournies pour liberer les ports 
+log # 53   debut lecteurcarte_lire_carte()
  
 Veuillez donner le numéro de la carte
-^C
